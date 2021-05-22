@@ -29,7 +29,7 @@ const routeConfig = Object.entries(namespaces)
   .map(([namespace, { controller, eventEmitter }]) => {
     const controllerEvents = controller.getEvents()
     eventEmitter.on(
-      constants.events.USER_CONNECTED,
+      constants.event.USER_CONNECTED,
       controller.onNewConnection.bind(controller)
     )
 
@@ -40,4 +40,5 @@ const routeConfig = Object.entries(namespaces)
     }
   })
 
+socketServer.attachEvents({ routeConfig })
 console.log('socket server is running at', server.address().port)
