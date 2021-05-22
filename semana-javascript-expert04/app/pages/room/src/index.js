@@ -1,8 +1,8 @@
 import { constants } from "../../_shared/constants.js"
-import SocketBuilder from "../../_shared/socket.js"
+import RoomSocketBuilder from "./util/roomSocket.js"
 
 
-const socketBuilder = new SocketBuilder({
+const socketBuilder = new RoomSocketBuilder({
   socketUrl: constants.socketUrl,
   namespace: constants.socketNamespaces.room
 })
@@ -10,6 +10,7 @@ const socketBuilder = new SocketBuilder({
 const socket = socketBuilder
   .setOnUserConnected((user) => console.log('User Connected!', user))
   .setOnUserDisconnected((user) => console.log('User Disconnected', user))
+  .setOnRoomUpdated((room) => console.log('room list!', room))
   .build();
 
 const room = {

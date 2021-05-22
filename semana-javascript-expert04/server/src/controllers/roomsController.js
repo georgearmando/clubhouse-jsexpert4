@@ -27,6 +27,17 @@ export default class RoomsController {
     const updatedRoom = this.#joinUserRoom(socket, updatedUserData, room)
     console.log(updatedRoom)
     socket.emit(constants.event.USER_CONNECTED, updatedUserData)
+    this.#notifyUsersOnRoom(socket, roomId, updatedUserData)
+    this.#replyWithActiveUsers(socket, updatedRoom.users)
+  }
+
+  #replyWithActiveUsers(socket, users) {
+    const event = constants.event.LOBBY_UPDATED
+    socket.emit(event, [...users.values()])
+  }
+  #notifyUsersOnRoom(socket, roomId, user) {
+    const event = constants.event.USER_CONNECTED
+    socket.to(roomId).emit(event, user)
   }
 
   #joinUserRoom(socket, user, room) {
