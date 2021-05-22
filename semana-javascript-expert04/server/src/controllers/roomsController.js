@@ -9,6 +9,8 @@ export default class RoomsController {
   getEvents() {
     const functions = Reflect.ownKeys(RoomsController.prototype)
       .filter(fn => fn !== 'constructor')
-      .map(name => [name, this.[name].bind(this)])
+      .map(name => [name, this[name].bind(this)])
+
+    return new Map(functions)
   }
 }
