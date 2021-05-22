@@ -43,15 +43,6 @@ export default class SocketServer {
       }
     })
 
-    const room = this.#io.of('/room')
-    room.on('connection', socket => {
-      socket.emit('userConnection', 'socket id is connected' + socket.id)
-
-      socket.on('joinRoom', (data) => {
-        console.log('received data', data)
-      })
-    })
-
     return new Promise((resolve, reject) => {
       server.on('error', reject)
       server.listen(this.port, () => resolve(server))
