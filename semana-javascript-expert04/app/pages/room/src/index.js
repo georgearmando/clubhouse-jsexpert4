@@ -13,13 +13,13 @@ const socket = socketBuilder
   .build();
 
 const room = {
-  id: Date.now(),
+  id: '001',
   topic: 'JS Expert Club House'
 }
 
 const user = {
   img: 'https://findicons.com/files/icons/169/avatar_boy/128/boy_1.png',
-  username: 'George Armando'
+  username: 'George Armando' + Date.now()
 }
 
 socket.emit(constants.events.JOIN_ROOM, { user, room })
